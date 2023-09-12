@@ -4,31 +4,46 @@ class Program
 {
     static void Main(string[] args)
     {
-        Random randomGenerator = new Random();
-        int intNumber = randomGenerator.Next(1, 100);
-
-        int intGuess;
-
+        string response;
         do
         {
-            Console.Write("What is your guess? ");
-            string guess = Console.ReadLine();
-            intGuess = int.Parse(guess);
+            Random randomGenerator = new Random();
+            int intNumber = randomGenerator.Next(1, 100);
 
-            if (intGuess > intNumber)
-            {
-                Console.WriteLine("Lower");
-            }
+            Console.WriteLine("");
+            Console.WriteLine("Welcome to the Number Guessing Game! (1 to 100)");
 
-            else if (intGuess < intNumber)
-            {
-                Console.WriteLine("Higher");
-            }
+            int intGuess;
+            int guessCount = 0;
 
-            else
+            do
             {
-                Console.WriteLine("You guessed it!");
-            }
-        } while (intNumber != intGuess);
+                Console.Write("What is your guess? ");
+                string guess = Console.ReadLine();
+                intGuess = int.Parse(guess);
+                guessCount = guessCount + 1;
+                if (intGuess > intNumber)
+                {
+                    Console.WriteLine("Lower");
+                }
+                else if (intGuess < intNumber)
+                {
+                    Console.WriteLine("Higher");
+                }
+                else
+                {
+                    Console.WriteLine("You guessed it!");
+                    // Console.WriteLine($"It took you {guessCount} guesses.");
+                }
+                // Console.WriteLine($"It took you {guessCount} guesses.");
+            } while (intNumber != intGuess);
+            Console.WriteLine($"It took you {guessCount} guesses.");
+
+            Console.Write("Do you want to play again? (yes/no) ");
+            response = Console.ReadLine();
+
+        }while (response == "yes");
+
+        Console.WriteLine("Thank you for playing. Goodbye!");
     }
 }
