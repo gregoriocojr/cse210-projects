@@ -8,24 +8,28 @@ class Program
         string number = Console.ReadLine();
         int intNumber = int.Parse(number);
 
-        Console.Write("What is your guess? ");
-        string guess = Console.ReadLine();
-        int intGuess = int.Parse(guess);
+        int intGuess;
 
-
-        if (intGuess > intNumber)
+        do
         {
-            Console.WriteLine("Lower");
-        }
+            Console.Write("What is your guess? ");
+            string guess = Console.ReadLine();
+            intGuess = int.Parse(guess);
 
-        else if (intGuess < intNumber)
-        {
-            Console.WriteLine("Higher");
-        }
+            if (intGuess > intNumber)
+            {
+                Console.WriteLine("Lower");
+            }
 
-        else
-        {
-            Console.WriteLine("You guessed it!");
-        }
+            else if (intGuess < intNumber)
+            {
+                Console.WriteLine("Higher");
+            }
+
+            else
+            {
+                Console.WriteLine("You guessed it!");
+            }
+        } while (intNumber != intGuess);
     }
 }
