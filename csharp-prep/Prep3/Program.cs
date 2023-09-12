@@ -8,7 +8,7 @@ class Program
         do
         {
             Random randomGenerator = new Random();
-            int intNumber = randomGenerator.Next(1, 100);
+            int intNumber = randomGenerator.Next(1, 101);
 
             Console.WriteLine("");
             Console.WriteLine("Welcome to the Number Guessing Game! (1 to 100)");
@@ -33,9 +33,7 @@ class Program
                 else
                 {
                     Console.WriteLine("You guessed it!");
-                    // Console.WriteLine($"It took you {guessCount} guesses.");
                 }
-                // Console.WriteLine($"It took you {guessCount} guesses.");
             } while (intNumber != intGuess);
             Console.WriteLine($"It took you {guessCount} guesses.");
 
