@@ -22,11 +22,29 @@ class Program
         } while (givenNumber != 0);
 
         int sum = numbers.Sum();
-        double average = numbers.Average();
-        int largest = numbers.Max();
-
         Console.WriteLine($"The sum is: {sum}");
+
+        double average = numbers.Average();
         Console.WriteLine($"The average is: {average}");
+
+        int largest = numbers.Max();
         Console.WriteLine($"The largest number is: {largest}");
+        
+        int smallestPositive = numbers[0];
+        foreach (int number in numbers)
+        {
+            if (number > 0 && number < smallestPositive)
+            {
+                smallestPositive = number;
+            }
+        }
+        Console.WriteLine($"The smallest positive number is: {smallestPositive}");
+
+        numbers.Sort();
+        Console.WriteLine("The sorted list is:");
+        foreach (int number in numbers)
+        {
+            Console.WriteLine(number);
+        }
     }
 }
