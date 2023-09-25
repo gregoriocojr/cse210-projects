@@ -17,6 +17,7 @@ public class PromptGenerator
     private List<string> _usedPrompts = new List<string>();
     private Random _random = new Random();
 
+    //Added codes so that prompts will not be repeated until all prompts had been used.
     public string GetRandomPrompt()
     {
         if (_promptText.Count == 0)

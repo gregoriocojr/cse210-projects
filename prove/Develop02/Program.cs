@@ -22,10 +22,10 @@ class Program
 
             if (response == "1")
             {
+                //Added codes in the PromptGenerator so that prompts will
+                //not be repeated until all prompts had been used.
                 string randomPrompt = promptGenerator.GetRandomPrompt();
                 Console.WriteLine(randomPrompt);
-                
-                
                 
                 Console.Write("> ");
                 string newEntryText = Console.ReadLine();
@@ -65,8 +65,9 @@ class Program
             }
             else
             {
+                // Added an error handling so that the choicess will be only from 1 to 5.
                 Console.WriteLine("Invalid input. Please enter a valid choice (1, 2, 3, 4, or 5).");
             }
         } while (response != "5");
-    }
+    } 
 }
