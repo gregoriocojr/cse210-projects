@@ -5,13 +5,14 @@ public class Reference
     private string _book;
     private int _chapter;
     private int _verse;
-    private int? _endVerse;
+    private int _endVerse;
 
     public Reference(string book, int chapter, int verse)
     {
         _book = book;
         _chapter = chapter;
         _verse = verse;
+        _endVerse = 0;
     }
 
     public Reference(string book, int chapter, int verse, int endVerse)
@@ -24,16 +25,10 @@ public class Reference
 
     public string GetDisplayText()
     {
-        if (!_endVerse.HasValue)
+        if (_endVerse > 0)
         {
-            return ($"{_book} {_chapter}:{_verse}");
+            return $"{_book} {_chapter}:{_verse}-{_endVerse}";
         }
-        else
-        {
-            return ($"{_book} {_chapter}:{_verse}-{_endVerse}");
-        }
+        return $"{_book} {_chapter}:{_verse}";
     }
 }
-
-//https://stackoverflow.com/questions/2735638/nullable-integer-in-net
-//https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types
