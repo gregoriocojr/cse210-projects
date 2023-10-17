@@ -1,0 +1,44 @@
+A question about RecordEvent and the GoalManager from a student:
+Every class that inherits from Goal needs to implement the RecordEvent, 
+IsComplete, and GetStringRepresentation.  They will either use the 
+GetDetailsString provided in the Goal class or they will override with 
+a new function (to do something different).  
+
+The purpose of RecordEvent is to determine if the goal is complete and 
+to return points.  Each type of Goal does it differently:
+
+ChecklistGoal – Update the counter for the number of types the goal has 
+been accomplished.  Return points everytime they meet the goal.  Return 
+additional bonus points once they have completed the goal multiple times 
+(according to the target)
+	
+SimpleGoal – Give points once the goal is accomplished and then mark it 
+completed (can’t do it again).
+	
+EternalGoal – Give points when the goal is accomplished but never mark 
+it completed.
+
+By implementing the RecordEvent in each class, you will be able to call 
+RecordEvent on any Goal and it will work.  This is polymorphism.
+
+The GoalManager does not inherit from the Goal class.  Instead of putting 
+all the menu logic, the saving/loading from files, and the prompts to the 
+user in the Main function, we will put that in the GoalManager class.  
+The GoalManager also keeps track of the user points and the list of Goals. 
+This means that the Main function just has to create a GoalManager object 
+and call Start.
+
+The GoalManager does the following:
+Start – Display the menu and responds to the user choice
+DisplayPlayerInfo – Display the points
+ListGoalNames – Display all the goal names
+ListGoalDetails – Display all the details of each goal 
+(calls GetDetailsString)
+SaveGoals – Save the goals to a file
+LoadGoals – Load the goals from a file
+CreateGoal – Give a menu to the user to select what kind of goal to 
+create, ask the user to type in the goal information (depending on the 
+goal type selected), create the goal object, and add it to the goal list
+RecordEvent – Show a list of goals to the user and let them select the 
+goal that they just completed.  This is where you will call the 
+RecordEvent in the goal object (what we talked about above). 

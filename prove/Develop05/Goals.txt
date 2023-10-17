@@ -1,0 +1,3 @@
+20
+SimpleGoal,speak,talk,10,False
+SimpleGoal,serve,ministering,20,False

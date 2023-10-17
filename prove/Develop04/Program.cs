@@ -10,11 +10,11 @@ class Program
         do
         {
             Console.Clear();
-            Console.WriteLine("Menu Options:");
-            Console.WriteLine("1. Start Breathing Activity");
-            Console.WriteLine("2. Start Reflection Activity");
-            Console.WriteLine("3. Start Listing Activity");
-            Console.WriteLine("4. Quit");
+            Console.WriteLine("Menu Options: \n" +
+                "1. Start Breathing Activity \n" +
+                "2. Start Reflection Activity \n" +
+                "3. Start Listing Activity \n" +
+                "4. Quit");
             Console.Write("Select a choice from the menu: ");
             choice = Console.ReadLine();
 
