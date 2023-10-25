@@ -13,8 +13,7 @@ public class OfficerManager
         Console.WriteLine("");
         Console.WriteLine("What is your position\n" +
             "1. Head of Office\n" +
-            "2. Human Resource\n" +
-            "3. Secretariat");
+            "2. Human Resource");
         Console.Write("Select your position: ");
         officerAction = Console.ReadLine();
     }
@@ -26,10 +25,8 @@ public class OfficerManager
         Console.WriteLine("What do you want to do?\n" +
             "1. View applications\n" +
             "2. Perform assigned task\n" +
-            "3. Generate report\n" +
-            "4. Quit");
+            "3. Quit");
         Console.Write("Please enter your choice: ");
         officerChoice = Console.ReadLine();
     }
-
 }

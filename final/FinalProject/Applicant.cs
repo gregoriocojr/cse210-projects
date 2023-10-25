@@ -1,14 +1,14 @@
-using System;
-
 public abstract class Applicant
 {
     private string _name;
     private string _contactNumber;
     private string _cityAddress;
+    protected string _applicationNumber;
 
     public string Name => _name;
     public string ContactNumber => _contactNumber;
     public string CityAddress => _cityAddress;
+    public string ApplicationNumber => _applicationNumber;
 
     public Applicant(string name, string contactNumber, string cityAddress)
     {
@@ -18,12 +18,6 @@ public abstract class Applicant
     }
 
     public abstract string GenerateApplicantionNumber();
-
-    public abstract void EnterCredentials();
-
-    public abstract void SubmitApplication();
-
-    public abstract void EditSubmission();
-
-    public abstract string CheckApplicationStatus();
+    
+    public abstract double CalculateScore();
 }
