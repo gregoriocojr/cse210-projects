@@ -14,7 +14,7 @@ public class NonTeaching : Applicant
         _experience = experience;
     }
 
-    public override string GenerateApplicantionNumber()
+    public override string GenerateApplicationNumber()
     {
         string xxxPart = _applicationCounterForNTP.ToString("D3");
         _applicationCounterForNTP++;

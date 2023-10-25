@@ -16,7 +16,7 @@ public class TeachingRelated : Applicant
         _experience = experience;
     }
 
-    public override string GenerateApplicantionNumber()
+    public override string GenerateApplicationNumber()
     {
         string xxxPart = _applicationCounterForTRP.ToString("D3");
         _applicationCounterForTRP++;
@@ -30,4 +30,3 @@ public class TeachingRelated : Applicant
         return score;
     }
 }
-

@@ -55,8 +55,18 @@ public class ApplicantManager
         contactNumber = Console.ReadLine();
         Console.Write("City Address: ");
         cityAddress = Console.ReadLine();
-        Console.WriteLine("---------------------------------------------");
-        Console.WriteLine("Select the corresponding point for Education:\n" +
+
+        Console.WriteLine("");
+        Console.WriteLine("Select position type:\n" +
+            "1. Teaching\n" +
+            "2. Teaching Related\n" +
+            "3. Non-Teaching");
+        Console.Write("Select your position type (1-3): ");
+        
+        if (int.TryParse(Console.ReadLine(), out int positionType) && positionType >= 1 && positionType <= 3)
+        {
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Select the corresponding point for Education:\n" +
             "     0 - No schooling or elementary undergraduate\n" +
             "     1 - Elementary grauate or junior high school undergraduate\n" +
             "     2 - Junior high school graduate or senior high school undergraduate\n" +
@@ -68,9 +78,8 @@ public class ApplicantManager
             "     8 - Master degree graduate\n" +
             "     9 - Units of a doctoral degree\n" +
             "    10 - Doctaral degree graduate");
-        Console.Write("Education (0-10): ");
-        if (int.TryParse(Console.ReadLine(), out education) && education >= 0 && education <= 10)
-        {
+            Console.WriteLine("Select the corresponding point for Education (0-10): ");
+            education = GetInput(0, 10);
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine("Select the corresponding point for Training:\n" +
             "     0 - Less than 8 hours of relevant training\n" +
@@ -83,69 +92,61 @@ public class ApplicantManager
             "     7 - At least 56 hours of relavant training\n" +
             "     8 - At least 64 hours of relavant training\n" +
             "     9 - At least 72 hours of relavant training\n" +
-            "    10 - At least 80 hours of relavant training"); 
-            Console.Write("Training (0-10): ");
-            if (int.TryParse(Console.ReadLine(), out training) && training >= 0 && training <= 10)
+            "    10 - At least 80 hours of relavant training");  
+            Console.WriteLine("Select the corresponding point for Training (0-10): ");
+            training = GetInput(0, 10);
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Select the corresponding point for Experience:\n" +
+            "     0 - Less than 1 month of relevant experience\n" +
+            "     1 - More than 1 month but less than 1 year of relavant experience\n" +
+            "     2 - At least 2 years of relavant experience\n" +
+            "     3 - At least 3 years of relavant experience\n" +
+            "     4 - At least 4 years of relavant experience\n" +
+            "     5 - At least 5 years of relavant experience\n" +
+            "     6 - At least 6 years of relavant experience\n" +
+            "     7 - At least 7 years of relavant experience\n" +
+            "     8 - At least 8 years of relavant experience\n" +
+            "     9 - At least 9 years of relavant experience\n" +
+            "    10 - At least 10 years of relavant experience");
+            Console.WriteLine("Select the corresponding point for Experience (0-10): ");
+            experience = GetInput(0, 10);
+
+            Applicant applicant = null;
+            switch (positionType)
             {
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine("Select the corresponding point for Experience:\n" +
-                "     0 - Less than 1 month of relevant experience\n" +
-                "     1 - More than 1 month but less than 1 year of relavant experience\n" +
-                "     2 - At least 2 years of relavant experience\n" +
-                "     3 - At least 3 years of relavant experience\n" +
-                "     4 - At least 4 years of relavant experience\n" +
-                "     5 - At least 5 years of relavant experience\n" +
-                "     6 - At least 6 years of relavant experience\n" +
-                "     7 - At least 7 years of relavant experience\n" +
-                "     8 - At least 8 years of relavant experience\n" +
-                "     9 - At least 9 years of relavant experience\n" +
-                "    10 - At least 10 years of relavant experience"); 
-                Console.Write("Experience (0-10): ");
-                if (int.TryParse(Console.ReadLine(), out experience) && experience >= 0 && experience <= 10)
-                {
-                    string applicationNumber = GenerateApplicationNumber();
-                    Console.WriteLine($"Application Number: {applicationNumber}");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input for experience. Please enter a number between 0 and 10.");
-                }
+                case 1:
+                    applicant = new Teaching(name, contactNumber, cityAddress, education, training, experience);
+                    break;
+                case 2:
+                    applicant = new TeachingRelated(name, contactNumber, cityAddress, education, training, experience);
+                    break;
+                case 3:
+                    applicant = new NonTeaching(name, contactNumber, cityAddress, education, training, experience);
+                    break;
             }
-            else
+
+            if (applicant != null)
             {
-                Console.WriteLine("Invalid input for training. Please enter a number between 0 and 10.");
+                string applicationNumber = applicant.GenerateApplicationNumber();
+                Console.WriteLine($"Application Number: {applicationNumber}");
+                double score = applicant.CalculateScore();
+                Console.WriteLine($"Score: {score}");
             }
         }
         else
         {
-            Console.WriteLine("Invalid input for education. Please enter a number between 0 and 10.");
+            Console.WriteLine("Invalid input for position type. Please select a number between 1 and 3.");
         }
-        // Console.ReadLine();
     }
 
-    public string GenerateApplicationNumber()
+    private int GetInput(int min, int max)
     {
-        // Generate the application number
-        // You can use _applicationCounterForTP, _applicationCounterForTRP, _applicationCounterForNTP, etc.
-        string applicationNumber = string.Empty;
-        // Your logic to generate the application number
-        return applicationNumber;
+        int value;
+        if (int.TryParse(Console.ReadLine(), out value) && value >= min && value <= max)
+        {
+            return value;
+        }
+        Console.WriteLine($"Invalid input. Please enter a number between {min} and {max}.");
+        return GetInput(min, max);
     }
-
-
-    // public void Continue()
-    // {
-    //     string action = "";
-    //     while (action == "")
-    //     {
-    //         Console.WriteLine("");
-    //         Console.WriteLine("Press Enter to continue.");
-
-    //         if(Console.ReadKey().Key == ConsoleKey.Enter)
-    //         {
-    //             Console.Clear();
-    //             break;
-    //         }
-    //     }
-    // }
 }

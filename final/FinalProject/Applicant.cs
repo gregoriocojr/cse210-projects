@@ -1,3 +1,5 @@
+using System;
+
 public abstract class Applicant
 {
     private string _name;
@@ -17,7 +19,7 @@ public abstract class Applicant
         _cityAddress = cityAddress;
     }
 
-    public abstract string GenerateApplicantionNumber();
+    public abstract string GenerateApplicationNumber();
     
     public abstract double CalculateScore();
 }

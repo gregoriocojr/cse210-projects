@@ -16,7 +16,7 @@ public class Teaching : Applicant
         _experience = experience;
     }
 
-    public override string GenerateApplicantionNumber()
+    public override string GenerateApplicationNumber()
     {
         string xxxPart = _applicationCounterForTP.ToString("D3");
         _applicationCounterForTP++;
@@ -30,4 +30,3 @@ public class Teaching : Applicant
         return score;
     }
 }
-
