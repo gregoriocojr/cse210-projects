@@ -9,12 +9,8 @@ public class NonTeaching : Applicant
     private static int _applicationCounterForNTP = 1;
 
     public NonTeaching(string name, string contactNumber, string cityAddress, int education, int training, int experience)
-        : base(name, contactNumber, cityAddress)
-    {
-        _education = education;
-        _training = training;
-        _experience = experience;
-    }
+        : base(name, contactNumber, cityAddress, education, training, experience)
+    {}
 
     public override string GenerateApplicationNumber()
     {

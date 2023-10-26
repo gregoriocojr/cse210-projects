@@ -15,26 +15,6 @@ public abstract class Officer
     }
     
     public abstract void ViewApplicantSubmission();
-    // {
-        // string submissionDirectory = "C:\\ApplicantSubmissions";
 
-        // if (Directory.Exists(submissionDirectory))
-        // {
-        //     Console.WriteLine("Viewing applicant submissions as Head of Office:");
-        //     string[] submissionFiles = Directory.GetFiles(submissionDirectory);
-
-        //     foreach (var submissionFile in submissionFiles)
-        //     {
-        //         string submissionContent = File.ReadAllText(submissionFile);
-        //         Console.WriteLine($"Applicant Submission: {submissionContent}");
-        //     }
-        // }
-
-        // else
-        // {
-        //     Console.WriteLine("Applicant submission directory not found.");
-        // }
-    // }
-
-    public abstract void PerformTask();
+    public abstract string PerformTask();
 }
