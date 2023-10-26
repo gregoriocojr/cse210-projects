@@ -8,7 +8,7 @@ public class Teaching : Applicant
 
     private static int _applicationCounterForTP = 1;
 
-    public Teaching(string name, string contactNumber, string cityAddress, int education, int training, int experience)
+    public Teaching(string name, string contactNumber, string cityAddress, int education, int training, int experience, string ApplicationNumber)
         : base (name, contactNumber, cityAddress, education, training, experience)
     {}
 

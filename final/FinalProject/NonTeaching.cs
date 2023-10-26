@@ -8,7 +8,7 @@ public class NonTeaching : Applicant
 
     private static int _applicationCounterForNTP = 1;
 
-    public NonTeaching(string name, string contactNumber, string cityAddress, int education, int training, int experience)
+    public NonTeaching(string name, string contactNumber, string cityAddress, int education, int training, int experience, string ApplicationNumber)
         : base(name, contactNumber, cityAddress, education, training, experience)
     {}
 

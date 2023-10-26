@@ -1,10 +1,18 @@
 using System;
 using System.IO;
-
+using System.Collections.Generic;
 
 public class ApplicantManager
 {
     private List<Applicant> _applicants = new List<Applicant>();
+
+    private Dictionary<string, int> applicationCounters = new Dictionary<string, int>
+    {
+        { "TP", 1 },
+        { "TRP", 1 },
+        { "NTP", 1 }
+    };
+
 
     public void ApplicantAction()
     {
@@ -25,7 +33,7 @@ public class ApplicantManager
                 break;
 
             case "2":
-                Console.WriteLine("codes for returning coming up...");
+                LoadApplicantByApplicationNumber();
                 break;
         }
     }
@@ -60,84 +68,81 @@ public class ApplicantManager
         {
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine("Select the corresponding point for Education:\n" +
-            "     0 - No schooling or elementary undergraduate\n" +
-            "     1 - Elementary graduate or junior high school undergraduate\n" +
-            "     2 - Junior high school graduate or senior high school undergraduate\n" +
-            "     3 - Senior high school graduate\n" +
-            "     4 - Bachelor degree undergraduate\n" +
-            "     5 - Vocational or associate degree holder\n" +
-            "     6 - Bachelor degree graduate\n" +
-            "     7 - Units of a master's degree\n" +
-            "     8 - Master's degree graduate\n" +
-            "     9 - Units of a doctoral degree\n" +
-            "    10 - Doctoral degree graduate");
+                "     0 - No schooling or elementary undergraduate\n" +
+                "     1 - Elementary graduate or junior high school undergraduate\n" +
+                "     2 - Junior high school graduate or senior high school undergraduate\n" +
+                "     3 - Senior high school graduate\n" +
+                "     4 - Bachelor degree undergraduate\n" +
+                "     5 - Vocational or associate degree holder\n" +
+                "     6 - Bachelor degree graduate\n" +
+                "     7 - Units of a master's degree\n" +
+                "     8 - Master's degree graduate\n" +
+                "     9 - Units of a doctoral degree\n" +
+                "    10 - Doctoral degree graduate");
             Console.WriteLine("Select the corresponding point for Education (0-10): ");
             education = GetInput(0, 10);
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine("Select the corresponding point for Training:\n" +
-            "     0 - Less than 8 hours of relevant training\n" +
-            "     1 - At least 8 hours of relevant training\n" +
-            "     2 - At least 16 hours of relevant training\n" +
-            "     3 - At least 24 hours of relevant training\n" +
-            "     4 - At least 32 hours of relevant training\n" +
-            "     5 - At least 40 hours of relevant training\n" +
-            "     6 - At least 48 hours of relevant training\n" +
-            "     7 - At least 56 hours of relevant training\n" +
-            "     8 - At least 64 hours of relevant training\n" +
-            "     9 - At least 72 hours of relevant training\n" +
-            "    10 - At least 80 hours of relevant training");
+                "     0 - Less than 8 hours of relevant training\n" +
+                "     1 - At least 8 hours of relevant training\n" +
+                "     2 - At least 16 hours of relevant training\n" +
+                "     3 - At least 24 hours of relevant training\n" +
+                "     4 - At least 32 hours of relevant training\n" +
+                "     5 - At least 40 hours of relevant training\n" +
+                "     6 - At least 48 hours of relevant training\n" +
+                "     7 - At least 56 hours of relevant training\n" +
+                "     8 - At least 64 hours of relevant training\n" +
+                "     9 - At least 72 hours of relevant training\n" +
+                "    10 - At least 80 hours of relevant training");
             Console.WriteLine("Select the corresponding point for Training (0-10): ");
             training = GetInput(0, 10);
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine("Select the corresponding point for Experience:\n" +
-            "     0 - Less than 1 month of relevant experience\n" +
-            "     1 - More than 1 month but less than 1 year of relevant experience\n" +
-            "     2 - At least 2 years of relevant experience\n" +
-            "     3 - At least 3 years of relevant experience\n" +
-            "     4 - At least 4 years of relevant experience\n" +
-            "     5 - At least 5 years of relevant experience\n" +
-            "     6 - At least 6 years of relevant experience\n" +
-            "     7 - At least 7 years of relevant experience\n" +
-            "     8 - At least 8 years of relevant experience\n" +
-            "     9 - At least 9 years of relevant experience\n" +
-            "    10 - At least 10 years of relevant experience");
+                "     0 - Less than 1 month of relevant experience\n" +
+                "     1 - More than 1 month but less than 1 year of relevant experience\n" +
+                "     2 - At least 2 years of relevant experience\n" +
+                "     3 - At least 3 years of relevant experience\n" +
+                "     4 - At least 4 years of relevant experience\n" +
+                "     5 - At least 5 years of relevant experience\n" +
+                "     6 - At least 6 years of relevant experience\n" +
+                "     7 - At least 7 years of relevant experience\n" +
+                "     8 - At least 8 years of relevant experience\n" +
+                "     9 - At least 9 years of relevant experience\n" +
+                "    10 - At least 10 years of relevant experience");
             Console.WriteLine("Select the corresponding point for Experience (0-10): ");
             experience = GetInput(0, 10);
+
+            string applicantType = jobGroup == 1 ? "TP" : (jobGroup == 2 ? "TRP" : "NTP");
+            string applicationNumber = $"{applicationCounters[applicantType]:D3}-{applicantType}";
+            applicationCounters[applicantType]++;
 
             Applicant applicant = null;
             switch (jobGroup)
             {
                 case 1:
-                    applicant = new Teaching(name, contactNumber, cityAddress, education, training, experience);
+                    applicant = new Teaching(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
                     break;
                 case 2:
-                    applicant = new TeachingRelated(name, contactNumber, cityAddress, education, training, experience);
+                    applicant = new TeachingRelated(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
                     break;
                 case 3:
-                    applicant = new NonTeaching(name, contactNumber, cityAddress, education, training, experience);
+                    applicant = new NonTeaching(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
                     break;
             }
 
             if (applicant != null)
             {
-                string applicationNumber = GetApplicationNumber(applicant);
                 Console.WriteLine($"Application Number: {applicationNumber}");
                 double score = GetScore(applicant);
                 Console.WriteLine($"Score: {score}");
                 string applicantDetails = GetStringDetails(applicant);
-                StoreApplicantInformation(applicantDetails);
+                StoreApplicantInformation(applicantDetails, applicationNumber);
             }
         }
         else
         {
             Console.WriteLine("Invalid input for job group. Please select a number between 1 and 3.");
         }
-    }
-
-    public string GetApplicationNumber(Applicant applicant)
-    {
-        string applicationNumber = applicant.GenerateApplicationNumber();
-        return applicationNumber;
     }
 
     public double GetScore(Applicant applicant)
@@ -152,22 +157,60 @@ public class ApplicantManager
         return details;
     }
 
-    public void StoreApplicantInformation(string details)
+    public void StoreApplicantInformation(string details, string applicationNumber)
     {
-        // Implement code to save the applicant details to a file
-        // Example: You can use StreamWriter to write to a file
-        // For simplicity, I'm providing a basic example here.
+        string folderPath = "ApplicantData";
+
         try
         {
-            using (StreamWriter writer = new StreamWriter("applicant_details.txt", true))
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = Path.Combine(folderPath, $"{applicationNumber}.txt");
+
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 writer.WriteLine(details);
             }
-            Console.WriteLine("Applicant information has been stored.");
+
+            Console.WriteLine("Applicant information has been stored in the folder: " + folderPath);
         }
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred while saving applicant information: " + ex.Message);
+        }
+    }
+
+    public void LoadApplicantByApplicationNumber()
+    {
+        Console.Clear();
+        Console.WriteLine("Load Applicant by Application Number");
+        Console.Write("Enter the Application Number: ");
+        string applicationNumber = Console.ReadLine();
+        string folderPath = "ApplicantData";
+
+        try
+        {
+            string filePath = Path.Combine(folderPath, $"{applicationNumber}.txt");
+
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                foreach (string line in lines)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Applicant with the provided Application Number not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while loading applicant information: " + ex.Message);
         }
     }
 
