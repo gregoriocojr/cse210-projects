@@ -6,18 +6,8 @@ public class ApplicantManager
 {
     private List<Applicant> _applicants = new List<Applicant>();
 
-    private Dictionary<string, int> applicationCounters = new Dictionary<string, int>
-    {
-        { "TP", 1 },
-        { "TRP", 1 },
-        { "NTP", 1 }
-    };
-
-
     public void ApplicantAction()
     {
-        string applicantAction = "";
-
         Console.Clear();
         Console.WriteLine("Hello, Applicant!");
         Console.WriteLine("");
@@ -25,7 +15,7 @@ public class ApplicantManager
             "1. New Applicant\n" +
             "2. Returning Applicant");
         Console.Write("Select your appropriate status: ");
-        applicantAction = Console.ReadLine();
+        string applicantAction = Console.ReadLine();
         switch (applicantAction)
         {
             case "1":
@@ -50,7 +40,7 @@ public class ApplicantManager
     public void NewApplicant()
     {
         string name, contactNumber, cityAddress;
-        int education, training, experience;
+        double education, training, experience;
 
         Console.Clear();
         Console.WriteLine("Hello, New Applicant!");
@@ -112,28 +102,28 @@ public class ApplicantManager
             Console.WriteLine("Select the corresponding point for Experience (0-10): ");
             experience = GetInput(0, 10);
 
-            string applicantType = jobGroup == 1 ? "TP" : (jobGroup == 2 ? "TRP" : "NTP");
-            string applicationNumber = $"{applicationCounters[applicantType]:D3}-{applicantType}";
-            applicationCounters[applicantType]++;
-
             Applicant applicant = null;
+            string applicationNumber = "";
+
             switch (jobGroup)
             {
                 case 1:
                     applicant = new Teaching(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
+                    applicationNumber = applicant.GenerateApplicationNumber();
                     break;
                 case 2:
                     applicant = new TeachingRelated(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
+                    applicationNumber = applicant.GenerateApplicationNumber();
                     break;
                 case 3:
                     applicant = new NonTeaching(name, contactNumber, cityAddress, education, training, experience, applicationNumber);
+                    applicationNumber = applicant.GenerateApplicationNumber();
                     break;
             }
-
             if (applicant != null)
             {
                 Console.WriteLine($"Application Number: {applicationNumber}");
-                double score = GetScore(applicant);
+                double score = applicant.CalculateScore();
                 Console.WriteLine($"Score: {score}");
                 string applicantDetails = GetStringDetails(applicant);
                 StoreApplicantInformation(applicantDetails, applicationNumber);
@@ -153,7 +143,7 @@ public class ApplicantManager
 
     public string GetStringDetails(Applicant applicant)
     {
-        string details = $"{applicant.ApplicationNumber}, {applicant.Name}, {applicant.ContactNumber}, {applicant.CityAddress}, {applicant.Education}, {applicant.Training}, {applicant.Experience}";
+        string details = $"{applicant.Name}, {applicant.ContactNumber}, {applicant.CityAddress}, {applicant.Education}, {applicant.Training}, {applicant.Experience}";
         return details;
     }
 

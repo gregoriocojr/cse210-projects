@@ -2,27 +2,29 @@ using System;
 
 public class TeachingRelated : Applicant
 {
-    public int _education;
-    public int _training;
-    public int _experience;
+    public double _education;
+    public double _training;
+    public double _experience;
 
     private static int _applicationCounterForTRP = 1;
 
-    public TeachingRelated(string name, string contactNumber, string cityAddress, int education, int training, int experience, string ApplicationNumber)
+    public TeachingRelated(string name, string contactNumber, string cityAddress, double education, double training, double experience, string ApplicationNumber)
         : base (name, contactNumber, cityAddress, education, training, experience)
-    {}
+    {
+        // ApplicationNumber = GenerateApplicationNumber();
+    }
 
     public override string GenerateApplicationNumber()
     {
         string xxxPart = _applicationCounterForTRP.ToString("D3");
         _applicationCounterForTRP++;
-        string ApplicationNumber = $"{xxxPart} - TRP";
-        return ApplicationNumber;
+        string applicationNumber = $"{xxxPart} - TRP";
+        return applicationNumber;
     }
 
     public override double CalculateScore()
     {
-        double score = _education/10 * 35 + _training/10 * 30 + _experience/10 * 35;
+        double score = _education * 3.5 + _training * 3 + _experience * 3.5;
         return score;
     }
 }

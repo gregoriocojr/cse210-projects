@@ -29,6 +29,9 @@ public abstract class Applicant
     }
 
     public abstract string GenerateApplicationNumber();
+    // {
+    //     return _applicationNumber;
+    // }
     
     public abstract double CalculateScore();
 }
